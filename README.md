@@ -10,7 +10,7 @@ git clone https://github.com/jainshilpi/RegressionTrainer.git -b trainer_2018
 cd RegressionTrainer
 make -j 4
 ```
-==================================Instructions for 2017=================================
+==================================Instructions for 2017=================================<br/>
 In order to use this code do:
 
 ```bash
