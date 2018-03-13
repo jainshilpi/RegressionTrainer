@@ -2,8 +2,8 @@ In order to use this code do:
 
 ```bash
 ==============================Instructions for 10X release=====================================
-cmsrel CMSSW_10_0_3_patch1
-cd CMSSW_10_0_3_patch1/src
+cmsrel CMSSW_10_0_3
+cd CMSSW_10_0_3/src
 cmsenv
 git clone git@github.com:cms-egamma/HiggsAnalysis.git
 scram b -j 4
