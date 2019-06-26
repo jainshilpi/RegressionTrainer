@@ -1,6 +1,18 @@
 In order to use this code do:
 
 ```bash
+==============================Instructions for 2017 UL release=====================================
+cmsrel CMSSW_10_5_0
+cd CMSSW_10_5_0/src
+cmsenv
+git clone git@github.com:cms-egamma/HiggsAnalysis.git
+scram b -j 4
+git clone https://github.com/jainshilpi/RegressionTrainer.git -b pfUL2017
+cd RegressionTrainer
+make -j 4
+```
+
+```bash
 ==============================Instructions for 10X release=====================================
 cmsrel CMSSW_10_0_3
 cd CMSSW_10_0_3/src
