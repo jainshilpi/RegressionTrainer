@@ -6,6 +6,11 @@ cmsrel CMSSW_10_5_0
 cd CMSSW_10_5_0/src
 cmsenv
 git clone git@github.com:cms-egamma/HiggsAnalysis.git
+To make it work in CMSSW_10_5_0, please change the line in HiggsAnalysis/GBRLikelihood/Buildfile.xml:
+<flags CXXFLAGS="-O3 -ftree-loop-linear -floop-interchange -ffast-math -fopenmp -std=gnu++1y"/>
+TO
+<flags CXXFLAGS="-O3 -ftree-loop-linear -floop-interchange -ffast-math -fopenmp "/>
+
 scram b -j 4
 git clone https://github.com/jainshilpi/RegressionTrainer.git -b pfUL2017
 cd RegressionTrainer
