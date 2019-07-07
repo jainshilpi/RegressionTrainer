@@ -142,7 +142,7 @@ def Make_jobscript( cfg, jobscriptDir, stdDir ):
 
 
     #### condor script
-    condor_file = jobscriptDir + '/condor_' + cfg.replace( '.config', '.sh' )
+    condor_file = jobscriptDir + '/condor_' + cfg.replace( '.config', '.sub' )
     condor_fp = open( condor_file, 'w' )
     run_fullpath = os.path.abspath( sh_file )
     pc = lambda text: condor_fp.write( text + '\n' )
@@ -150,10 +150,11 @@ def Make_jobscript( cfg, jobscriptDir, stdDir ):
     pc( 'output                              = '+ cfg.replace( '.config', '.out' ) )
     pc( 'error                              = '+ cfg.replace( '.config', '.err' ) )
     pc( 'log                              = '+ cfg.replace( '.config', '.log' ) )
+    pc( 'when_to_transfer_output = ON_EXIT_OR_EVICT' )
     pc( '+JobFlavour                     = "tomorrow"')
     pc( 'RequestCpus                     = 8' )
-    pc( 'queue 1 \n')
-
+    pc( " queue 1 \n" )
+    condor_fp.close()
 
     # ------------------
     # Parsing the command
