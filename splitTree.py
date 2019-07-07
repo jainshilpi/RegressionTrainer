@@ -6,8 +6,18 @@ import ROOT, math, numpy
 #inputFile = ROOT.TFile.Open('root://eoscms.cern.ch//eos/cms/store/group/phys_egamma/PFClusteRegressionTrees/pfClusters_noPU_PU_training.root')
 #inputFile = ROOT.TFile.Open('root://eoscms.cern.ch//eos/cms/store/group/phys_egamma/PFClusteRegressionTrees/pfClusters_noPU_training.root')
 #inputFile = ROOT.TFile.Open('root://eoscms.cern.ch//eos/cms/store/group/phys_egamma/PFClusteRegressionTrees/pfClusters_noPU_v1_training.root')
-inputFile = ROOT.TFile.Open('root://eoscms.cern.ch//eos/cms/store/group/phys_egamma/PFClusteRegressionTrees/afterDebug_16june/pfClusters_noPU_training.root')
+#inputFile = ROOT.TFile.Open('root://eoscms.cern.ch//eos/cms/store/group/phys_egamma/PFClusteRegressionTrees/afterDebug_16june/pfClusters_noPU_training.root')
 #inputFile = ROOT.TFile.Open('/afs/cern.ch/work/s/shilpi/work/2015/Egamma_work_PFcluster/CMSSW_9_2_0/src/RegressionTreeProducer/SimpleNtuplizer/test/tree.root')
+
+#inputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_noPU_training.root')
+#inputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_PU_training.root')
+
+#inputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_noPU_training.root')
+#inputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_noPU_training.root')
+#inputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_PU_training.root')
+
+inputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_PU_training.root')
+
 inputTree = inputFile.Get('een_analyzer/PfTree')
 
 categories = ['ZS1_EB', 'ZS1_EE', 
@@ -20,7 +30,7 @@ ietamod20 = numpy.zeros(1, dtype=float)
 iphimod20 = numpy.zeros(1, dtype=float)
 tgtvar    = numpy.zeros(1, dtype=float)
 nlgtgtvar = numpy.zeros(1, dtype=float)
-nhits     = numpy.zeros(1, dtype=int)
+nhits_mod     = numpy.zeros(1, dtype=int)
 
 
 outputs = []
@@ -28,7 +38,16 @@ for cat in categories:
     outputs.append([])
     #outputs[-1].append(ROOT.TFile.Open('pfClustersTree_%s.root'% cat, 'RECREATE'))
 #    outputs[-1].append(ROOT.TFile.Open('eos/cms/store/group/phys_egamma/PFClusteRegressionTrees/splitTraining_ZS_FULL_3pTbins/pfClustersTree_%s.root'% cat, 'RECREATE'))
-    outputs[-1].append(ROOT.TFile.Open('eos/cms/store/group/phys_egamma/PFClusteRegressionTrees/afterDebug_16june/pfClustersTree_%s.root'% cat, 'RECREATE'))
+    #outputs[-1].append(ROOT.TFile.Open('eos/cms/store/group/phys_egamma/PFClusteRegressionTrees/afterDebug_16june/pfClustersTree_%s.root'% cat, 'RECREATE'))
+
+#    outputs[-1].append(ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClustersTree_%s.root'% cat, 'RECREATE'))
+
+#    outputs[-1].append(ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClustersTree_%s.root'% cat, 'RECREATE'))
+
+    #outputs[-1].append(ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClustersTree_%s.root'% cat, 'RECREATE'))
+
+    outputs[-1].append(ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/PU_allEta/pfClustersTree_%s.root'% cat, 'RECREATE'))
+
 #    outputs[-1].append(ROOT.TFile.Open('test_%s.root'% cat, 'RECREATE'))
     outputs[-1][0].mkdir('een_analyzer')
     outputs[-1][0].cd('een_analyzer')
@@ -37,11 +56,18 @@ for cat in categories:
 #    outputs[-1][1].Branch('iphimod20', iphimod20, 'iphimod20/D')
 #    outputs[-1][1].Branch('nlgtgtvar', nlgtgtvar, 'nlgtgtvar/D')
 #    outputs[-1][1].Branch('tgtvar', tgtvar, 'tgtvar/D')
-#    outputs[-1][1].Branch('nhits', nhits, 'nhits/I')
+#    outputs[-1][1].Branch('nhits_mod', nhits_mod, 'nhits_mod/I')
 
 for event in inputTree:
     if event.genEnergy < 0.25: continue
     if event.nClus > 2: continue
+
+    #if event.clusEta > 2.5: continue
+    #if event.clusEta < -2.5: continue
+
+#    if event.clusEta > 2.: continue
+#    if event.clusEta < -2.: continue
+
     signeta = -1.
     if event.clusIetaIx > 0: signeta = 1.
 #    ietamod20[0] = (event.clusIetaIx-26*signeta) % 20
@@ -59,9 +85,13 @@ for event in inputTree:
         nlgtgtvar[0] = (event.genEnergy/event.clusrawE)
         tgtvar[0] = math.log(event.genEnergy/event.clusrawE)
 
-        nhits[0] = event.clusSize
-        if(event.clusSize >= 3):
-            nhits[0] = 3
+#        nhits_mod[0] = event.clusSize
+#        if(event.clusSize >= 3):
+#            nhits_mod[0] = 3
+
+        ###TRY 19th may, 2019
+#        if(event.clusSize >= 5):
+#            nhits_mod[0] = 5
         
         if event.clusFlag == 1:
         #if event.clusSize == 1:
@@ -77,6 +107,13 @@ for event in inputTree:
     elif event.clusLayer == -2:
         nlgtgtvar[0] = (event.genEnergy/(event.clusrawE+event.clusPS1+event.clusPS2))
         tgtvar[0] = math.log(event.genEnergy/(event.clusrawE+event.clusPS1+event.clusPS2))
+
+
+#        nhits_mod[0] = event.clusSize
+
+#        if(event.clusSize >= 5):
+#            nhits_mod[0] = 5
+
         #if event.clusFlag == 1:
         if event.clusFlag == 1:
         #if event.clusSize == 1:

@@ -8,7 +8,9 @@ def separate(initial,target,filename,inputTree, outfilename):
 	#outputFile = ROOT.TFile.Open('pfClusters_%s_%s.root' %(filename,outfilename), 'RECREATE')
 #	outputFile = ROOT.TFile.Open('eos/cms/store/group/phys_egamma/PFClusteRegressionTrees/pfClusters_%s_%s.root' %(filename,outfilename), 'RECREATE')
 #	outputFile = ROOT.TFile.Open('eos/cms/store/group/phys_egamma/PFClusteRegressionTrees/afterDebug_16june/pfClusters_%s_%s.root' %(filename,outfilename), 'RECREATE')
-	outputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/MC18_V2/FlatTrees/pfClusters_%s_%s.root' %(filename,outfilename), 'RECREATE')
+#	outputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/MC18_V2/FlatTrees/pfClusters_%s_%s.root' %(filename,outfilename), 'RECREATE')
+#	outputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_%s_%s.root' %(filename,outfilename), 'RECREATE')
+	outputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_%s_%s.root' %(filename,outfilename), 'RECREATE')
 	outputFile.mkdir('een_analyzer')
 	outputFile.cd('een_analyzer')
 	
@@ -26,9 +28,11 @@ def separate(initial,target,filename,inputTree, outfilename):
 	outputTree = inputTree.CloneTree(0)
 #	print "Now writing the branch weight in the output file"
 	weight = numpy.zeros(1, dtype=float)
+	nhits_mod = numpy.zeros(1, dtype=int)
 	
 
 	outputTree.Branch('weight',weight,'weight/D')
+	outputTree.Branch('nhits_mod',nhits_mod,'nhits_mod/I')
 
 #	print "Entries in output tree ", outputTree.GetEntries()
 
@@ -38,6 +42,11 @@ def separate(initial,target,filename,inputTree, outfilename):
 			raise Exception('TTree::GetEntry() failed')
         
 		weight[0] = (1.0/(target-initial))
+		nhits_mod[0] = inputTree.clusSize
+		if(inputTree.clusSize >= 3):
+			nhits_mod[0] = 3
+
+		#print("nhits %d : nhits_mod %d" %(inputTree.clusSize,nhits_mod[0]))	
 	#	print "weight is ",weight[0]
 		outputTree.Fill()
 
@@ -51,8 +60,17 @@ def separate(initial,target,filename,inputTree, outfilename):
 #inputFile = ROOT.TFile.Open('root://eoscms.cern.ch//eos/cms/store/group/phys_egamma/PFClusteRegressionTrees/pfClusters_%s.root' % sys.argv[1])
 #inputFile = ROOT.TFile.Open('root://eoscms.cern.ch//eos/cms/store/group/phys_egamma/PFClusteRegressionTrees/afterDebug_16june/pfClusters_%s.root' % sys.argv[1])
 
-print "input file is /eos/cms/store/group/phys_egamma/PFClusterCalibration/MC18_V2/FlatTrees/pfClusters_%s.root", sys.argv[1]
-inputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/MC18_V2/FlatTrees/pfClusters_%s.root' % sys.argv[1])
+#print "input file is /eos/cms/store/group/phys_egamma/PFClusterCalibration/MC18_V2/FlatTrees/pfClusters_%s.root", sys.argv[1]
+#inputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/MC18_V2/FlatTrees/pfClusters_%s.root' % sys.argv[1])
+
+
+#print "input file is /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/pfClusters_%s.root", sys.argv[1]
+#inputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/pfClusters_%s.root' % sys.argv[1])
+
+
+print "input file is /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_%s.root", sys.argv[1]
+inputFile = ROOT.TFile.Open('/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_%s.root' % sys.argv[1])
+
 inputTree = inputFile.Get('een_analyzer/PfTree')
 nentries = int(inputTree.GetEntries())
 

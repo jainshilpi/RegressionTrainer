@@ -1,6 +1,14 @@
-#hadd pfClusters_noPU_training.root pfClusters_noPU_0p1TO10_training.root pfClusters_noPU_10TO300_training.root
-#hadd pfClusters_noPU_testing.root pfClusters_noPU_0p1TO10_testing.root pfClusters_noPU_10TO300_testing.root
-hadd pfClusters_PU_training.root pfClusters_PU_0p01To5_training.root pfClusters_PU_5To300_training.root
-hadd pfClusters_PU_testing.root pfClusters_PU_0p01To5_testing.root pfClusters_PU_5To300_testing.root 
-#hadd pfClusters_noPU_PU_training.root pfClusters_noPU_training.root pfClusters_PU_training.root
-#hadd pfClusters_noPU_PU_testing.root pfClusters_noPU_testing.root pfClusters_PU_testing.root
+#hadd /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_PU_training.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_PU0To10_training.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_PU10To300_training.root
+#hadd /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_PU_testing.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_PU0To10_testing.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_PU10To300_testing.root 
+
+#hadd /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_noPU_training.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_noPU0To10_training.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_noPU10To300_training.root
+#hadd /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_noPU_testing.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_noPU0To10_testing.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/pfClusters_noPU10To300_testing.root 
+
+
+
+hadd /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_PU_training.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_PU0To10_training.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_PU10To300_training.root
+hadd /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_PU_testing.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_PU0To10_testing.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_PU10To300_testing.root 
+
+hadd /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_noPU_training.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_noPU0To10_training.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_noPU10To300_training.root
+hadd /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_noPU_testing.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_noPU0To10_testing.root /eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/pfClusters_noPU10To300_testing.root 
+

@@ -73,11 +73,20 @@ def FitOneSlice( self, hdata_reduced, histvar, unbinnedFit=False ):
     mean = ROOT.RooRealVar( RootName(), RootName(), 1.,   0.7,    1.5 ); ###SJ
     #sig  = ROOT.RooRealVar( RootName(), RootName(), 0.01, 0.0002, 0.8 );
     #sig  = ROOT.RooRealVar( RootName(), RootName(), 0.01, 0.0002, 1.4);
-    sig  = ROOT.RooRealVar( RootName(), RootName(), 0.1, 0.0002, 1.4);
+
+#    sig  = ROOT.RooRealVar( RootName(), RootName(), 0.1, 0.0002, 1.4);
+    sig  = ROOT.RooRealVar( RootName(), RootName(), 0.1, 0.0002, 4);
+
     #a1   = ROOT.RooRealVar( RootName(), RootName(), 3,    0.05,   10 );
     #a2   = ROOT.RooRealVar( RootName(), RootName(), 3,    0.05,   10 );
-    a1   = ROOT.RooRealVar( RootName(), RootName(), 3,    0.05,   150 );
-    a2   = ROOT.RooRealVar( RootName(), RootName(), 3,    0.05,   150 );
+
+    
+    #a1   = ROOT.RooRealVar( RootName(), RootName(), 3,    0.05,   150 );
+    #a2   = ROOT.RooRealVar( RootName(), RootName(), 3,    0.05,   150 );
+
+
+    a1   = ROOT.RooRealVar( RootName(), RootName(), 2,    0.05,   150 );
+    a2   = ROOT.RooRealVar( RootName(), RootName(), 1,    0.05,   150 );
 
     #a1   = ROOT.RooRealVar( RootName(), RootName(), 2 );
     #a1.setConstant(True)
@@ -98,6 +107,8 @@ def FitOneSlice( self, hdata_reduced, histvar, unbinnedFit=False ):
             histvar.GetName(), self.fit_x_min, self.fit_x_max ), 3 )
 
     self.p( 'Number of entries in fit dataset: ' + str(hdata_fit.numEntries()), 4 )
+
+
     
 
     if unbinnedFit:
@@ -119,14 +130,33 @@ def FitOneSlice( self, hdata_reduced, histvar, unbinnedFit=False ):
             hdata_fit
             )
 
+
+        ####23rd May, 2019
+        #hdatahist_hist_fit = hdatahist_fit.createHistogram( RootName(), histvar, ROOT.RooFit.Binning(nBinning) )
+
+        #peak = hdatahist_hist_fit.GetXaxis().GetBinCenter(hdatahist_hist_fit.GetMaximumBin())
+        #histrms  = hdatahist_hist_fit.GetRMS()
+
+
+        #self.fit_x_min = peak - 0.1*histrms
+        #self.fit_x_max = peak + 0.1*histrms
+
+        #self.fit_x_min = 0.9
+        #self.fit_x_max = 1.1
+
+
+        print "This is binned fit!!!"
         pdfCB.fitTo(hdatahist_fit,
                     ROOT.RooFit.Range(self.fit_x_min, self.fit_x_max),
+                    #ROOT.RooFit.Range(0.9,1.1),
                     ROOT.RooFit.PrintEvalErrors(-1), ROOT.RooFit.PrintLevel(-1)
+                    #ROOT.RooFit.PrintEvalErrors(-1), ROOT.RooFit.PrintLevel(2)
                     )
         mean.setVal(1.0)
-        sig.setVal(0.2*sig.getVal())
+        #sig.setVal(0.2*sig.getVal())
         pdfCB.fitTo(hdatahist_fit,
                     ROOT.RooFit.Range(self.fit_x_min, self.fit_x_max),
+                    #ROOT.RooFit.Range(0.9,1.1),
                     ROOT.RooFit.PrintEvalErrors(-1), ROOT.RooFit.PrintLevel(-1)
                     )
             
@@ -265,8 +295,11 @@ def FitOneSliceGaus( self, hdata_reduced, histvar, unbinnedFit=False ):
 
 #    self.fit_x_min = peak - 0.6*histrms
 
-    self.fit_x_min = peak - 0.4*histrms
-    self.fit_x_max = peak + 0.5*histrms
+#    self.fit_x_min = peak - 0.4*histrms
+#    self.fit_x_max = peak + 0.5*histrms
+
+    self.fit_x_min = peak - 0.6*histrms
+    self.fit_x_max = peak + 0.6*histrms
 
 
     #self.fit_x_min = peak - 0.4*histrms

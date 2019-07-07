@@ -202,6 +202,7 @@ int main(int argc, char** argv) {
   //TTreeFormula weight("weight", "weight", testingTree);
   TTreeFormula nvtx("nvtx", "nvtx", testingTree);
   TTreeFormula nhits("nhits", "nhits", testingTree);
+  //TTreeFormula nhits("nhits_mod", "nhits_mod", testingTree);
 
   char_separator<char> sep(":");
 

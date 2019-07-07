@@ -209,6 +209,9 @@ def Fit():
     print 'Getting dataset (using the macro)'
     #eventcut = ''
     eventcut = 'clusrawE > 0.25'
+
+    #eventcut = 'clusrawE > 0.25 && clusEta<2.5 && clusEta>-2.5'
+    #eventcut = 'clusrawE > 0.25 && clusEta<2. && clusEta>-2.'
     hdata = ROOT.LoadDataset( eventcut, dobarrel, doZS, doALL, args.ntup, 'een_analyzer', tree_name, VarsArgList )
     print '  Using {0} entries'.format( hdata.numEntries() )
 
@@ -244,6 +247,7 @@ def Fit():
 
     ecor91ArgList = ROOT.RooArgList( e91X, genEnergy )
     ecor91formula = ROOT.RooFormulaVar( 'ecor91formula', 'corr. (10X)', '(@0/@1)', ecor91ArgList )
+    #ecor91formula = ROOT.RooFormulaVar( 'ecor91formula', 'corr. (94X)', '(@0/@1)', ecor91ArgList )
     ecor91var = hdata.addColumn(ecor91formula)
     ecor91var.setRange( 0., 2. )
     ecor91var.setBins(nBinningHistVars)
@@ -369,7 +373,7 @@ def Fit():
 
         histogramVariables = [
             rawvar,
-            ecor74var,
+            #ecor74var,
             ecor91var,
             ]
         
@@ -422,8 +426,11 @@ def Fit():
             #genEta_bounds += [ 1.62 + 0.055*i for i in xrange(22) ]
 #            genEta_bounds += [ 1.62 + 0.1*i for i in xrange(10) ]
 #            genEta_bounds += [ 1.62 + 0.15*i for i in xrange(7) ]
-            genEta_bounds += [ 1.6 + 0.2*i for i in xrange(5) ]
-            genEta_bounds += [3.0]
+
+            #genEta_bounds += [ 1.6 + 0.2*i for i in xrange(5) ]
+            #genEta_bounds += [3.0]
+            genEta_bounds += [ 1.6 + 0.2*i for i in xrange(4) ]
+            genEta_bounds += [2.5, 3.0]
 
 #        if dobarrel:
 #            genEta_bounds = [ 0.0 + 0.075*2*i for i in xrange(11) ]

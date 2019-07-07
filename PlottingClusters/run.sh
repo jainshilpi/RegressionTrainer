@@ -124,7 +124,28 @@
 
 
 
-python Fit.py --region EB --flag ZS --ntup ../applyRegressionClusters/pfClusters_PU_withRegression.root --fitfun Gaus
-python Fit.py --region EE --flag ZS --ntup ../applyRegressionClusters/pfClusters_PU_withRegression.root --fitfun Gaus
-python Fit.py --region EB --flag FULL --ntup ../applyRegressionClusters/pfClusters_PU_withRegression.root --fitfun Gaus
-python Fit.py --region EE --flag FULL --ntup ../applyRegressionClusters/pfClusters_PU_withRegression.root --fitfun Gaus
+#python Fit.py --region EB --flag ZS --ntup ../applyRegressionClusters/pfClusters_PU_withRegression.root --fitfun Gaus
+#python Fit.py --region EE --flag ZS --ntup ../applyRegressionClusters/pfClusters_PU_withRegression.root --fitfun Gaus
+#python Fit.py --region EB --flag FULL --ntup ../applyRegressionClusters/pfClusters_PU_withRegression.root --fitfun Gaus
+#python Fit.py --region EE --flag FULL --ntup ../applyRegressionClusters/pfClusters_PU_withRegression.root --fitfun Gaus
+
+
+#filename=/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/rootfiles_EEweights10pM5/pfClusters_PU_withRegression.root
+#filename=/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/FlatTrees/v1/nhitsLT5/pfClusters_PU_withRegression.root
+#filename=../applyRegressionClusters/pfClusters_PU_withRegression.root
+
+#filename=../applyRegressionClusters/pfClusters_noPU_withRegression.root
+#filename=../applyRegressionClusters/pfClusters_PU_withRegression.root
+
+filename=pfClusters_noPU_PU_withRegression_MCv1.root
+#filename=/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/rootfiles_noPU_EEweights10pM5/pfClusters_noPU_withRegression.root
+
+#filename=/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/finalTrainedFiles_EEweights10pM6/pfClusters_PU_withRegression.root
+
+#filename=/eos/cms/store/group/phys_egamma/PFClusterCalibration/150_V0_2017/rootfiles_EEweights10pM5/pfClusters_PU_withRegression.root
+
+#filename=../applyRegressionClusters/pfClusters_PU_withRegression.root
+#python Fit.py --region EB --flag ZS --ntup ${filename} --fitfun Gaus
+#python Fit.py --region EE --flag ZS --ntup ${filename} --fitfun Gaus
+#python Fit.py --region EB --flag FULL --ntup ${filename} --fitfun Gaus
+python Fit.py --region EE --flag FULL --ntup ${filename} --fitfun Gaus

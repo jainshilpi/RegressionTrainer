@@ -1,5 +1,3 @@
-
-
 #!/usr/bin/env python
 """
 Thomas:
@@ -24,7 +22,7 @@ from time import sleep
 parser = argparse.ArgumentParser()
 parser.add_argument( '--test', action='store_true', help='Does not submit the job, but creates the .sh file and prints')
 parser.add_argument( '-q', '--queue',
-    type=str, choices=['short', 'all', 'long', '8nm', '1nh', '8nh', '1nd', '2nd', '1nw', '2nw' ],
+    type=str, choices=['short', 'all', 'long', '8nm', '1nh', '8nh', '1nd', '2nd', '1nw', '2nw' ,'cmscaf1nd', 'cmscaf1nw', 'cmscaf1nh'],
     default='2nw', help='which queue to submit to')
 parser.add_argument( '-n', '--normalmemory', action='store_true', help='By default more memory is requested; this option disables that')
 parser.add_argument( '-k', '--keep', action='store_true', help='Does not clean the output and jobscript directories')
@@ -118,6 +116,7 @@ def Make_jobscript( cfg, jobscriptDir, stdDir ):
 
 
     # Going into right directory
+    p('#!/bin/bash')    
     p( 'cd {0}/src'.format( os.path.abspath( os.environ['CMSSW_BASE'] ) ) )
     p( 'eval `scramv1 runtime -sh`' )
     p( 'cd RegressionTrainer' )
@@ -134,11 +133,26 @@ def Make_jobscript( cfg, jobscriptDir, stdDir ):
 
     sh_fp.close()
 
+    
 
     # ======================================
     # Setting permissions and submitting
 
     os.system( 'chmod 777 ' + sh_file  )
+
+
+    #### condor script
+    condor_file = jobscriptDir + '/condor_' + cfg.replace( '.config', '.sh' )
+    condor_fp = open( condor_file, 'w' )
+    run_fullpath = os.path.abspath( sh_file )
+    pc = lambda text: condor_fp.write( text + '\n' )
+    pc( 'executable                              = '+ run_fullpath )
+    pc( 'output                              = '+ cfg.replace( '.config', '.out' ) )
+    pc( 'error                              = '+ cfg.replace( '.config', '.err' ) )
+    pc( 'log                              = '+ cfg.replace( '.config', '.log' ) )
+    pc( '+JobFlavour                     = "tomorrow"')
+    pc( 'RequestCpus                     = 8' )
+    pc( 'queue 1 \n')
 
 
     # ------------------
@@ -158,7 +172,8 @@ def Make_jobscript( cfg, jobscriptDir, stdDir ):
 
     elif onLxplus:
 
-        cmd = 'bsub -R "rusage[mem=30000]" -q {0} -J {1} < '.format(args.queue, sh_file.rsplit('/',1)[-1].replace('.sh','') ) + os.path.relpath(sh_file)
+        #cmd = 'bsub -R "rusage[mem=30000]" -q {0} -J {1} < '.format(args.queue, sh_file.rsplit('/',1)[-1].replace('.sh','') ) + os.path.relpath(sh_file)
+        cmd = 'condor_submit ' + os.path.relpath(condor_file)
 
 
     # ------------------

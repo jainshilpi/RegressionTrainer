@@ -243,14 +243,33 @@ python Plot.py --plotdir FitPickles EEZS_EEZS_GENPT_0006_0025.pickle --override 
 
 #####Feb 14, 2018
 python Plot.py --plotdir FitPickles EBZS_EBZS_GENPT_0006_0025.pickle --override --fitfun Gaus
-python Plot.py --plotdir FitPickles EEZS_EEZS_GENPT_0006_0025.pickle --override --fitfun Gaus
-python Plot.py --plotdir FitPickles EEZS_EEZS_GENPT_0000_0006.pickle --override --fitfun Gaus
 python Plot.py --plotdir FitPickles EBFULL_EBFULL_GENPT_0001_0005.pickle --override --fitfun Gaus
-python Plot.py --plotdir FitPickles EEFULL_EEFULL_GENPT_0001_0005.pickle --override --fitfun Gaus
 python Plot.py --plotdir FitPickles EBFULL_EBFULL_GENPT_0005_0020.pickle --override --fitfun Gaus
 python Plot.py --plotdir FitPickles EBFULL_EBFULL_GENPT_0005_0020.pickle --override
-python Plot.py --plotdir FitPickles EEFULL_EEFULL_GENPT_0005_0020.pickle --override
-python Plot.py --plotdir FitPickles EEFULL_EEFULL_GENPT_0020_0100.pickle --override
 python Plot.py --plotdir FitPickles EBFULL_EBFULL_GENPT_0020_0100.pickle --override
 python Plot.py --plotdir FitPickles EBFULL_EBFULL_GENPT_0100_0300.pickle --override
+python Plot.py --plotdir FitPickles EBZS_EBZS_GENPT_0000_0006.pickle --override --fitfun Gaus
+
+python Plot.py --plotdir FitPickles EBZS_EBZS_GENETA_0006_0025.pickle --override --fitfun Gaus
+python Plot.py --plotdir FitPickles EBFULL_EBFULL_GENETA_0001_0005.pickle --override --fitfun Gaus
+python Plot.py --plotdir FitPickles EBFULL_EBFULL_GENETA_0005_0020.pickle --override --fitfun Gaus
+python Plot.py --plotdir FitPickles EBFULL_EBFULL_GENETA_0005_0020.pickle --override
+python Plot.py --plotdir FitPickles EBFULL_EBFULL_GENETA_0020_0100.pickle --override
+python Plot.py --plotdir FitPickles EBFULL_EBFULL_GENETA_0100_0300.pickle --override
+python Plot.py --plotdir FitPickles EBZS_EBZS_GENETA_0000_0006.pickle --override --fitfun Gaus
+
+
+
+python Plot.py --plotdir FitPickles EEZS_EEZS_GENPT_0006_0025.pickle --override --fitfun Gaus
+python Plot.py --plotdir FitPickles EEZS_EEZS_GENPT_0000_0006.pickle --override --fitfun Gaus
+python Plot.py --plotdir FitPickles EEFULL_EEFULL_GENPT_0005_0020.pickle --override
+python Plot.py --plotdir FitPickles EEFULL_EEFULL_GENPT_0020_0100.pickle --override
+python Plot.py --plotdir FitPickles EEFULL_EEFULL_GENPT_0001_0005.pickle --override --fitfun Gaus
 python Plot.py --plotdir FitPickles EEFULL_EEFULL_GENPT_0100_0300.pickle --override
+
+python Plot.py --plotdir FitPickles EEZS_EEZS_GENETA_0006_0025.pickle --override --fitfun Gaus
+python Plot.py --plotdir FitPickles EEZS_EEZS_GENETA_0000_0006.pickle --override --fitfun Gaus
+python Plot.py --plotdir FitPickles EEFULL_EEFULL_GENETA_0005_0020.pickle --override
+python Plot.py --plotdir FitPickles EEFULL_EEFULL_GENETA_0020_0100.pickle --override
+python Plot.py --plotdir FitPickles EEFULL_EEFULL_GENETA_0001_0005.pickle --override --fitfun Gaus
+python Plot.py --plotdir FitPickles EEFULL_EEFULL_GENETA_0100_0300.pickle --override
