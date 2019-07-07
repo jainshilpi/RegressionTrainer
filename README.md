@@ -12,7 +12,7 @@ TO
 <flags CXXFLAGS="-O3 -ftree-loop-linear -floop-interchange -ffast-math -fopenmp "/>
 
 scram b -j 4
-git clone https://github.com/jainshilpi/RegressionTrainer.git -b PFUL2017_trainer
+git clone https://github.com/jainshilpi/RegressionTrainer.git -b PF2017UL_trainer
 cd RegressionTrainer
 make -j 4
 ```
